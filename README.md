@@ -14,3 +14,17 @@ mvn archetype:generate -DarchetypeArtifactId=jersey-quickstart-grizzly2 \
 -DarchetypeVersion=2.39.1
 ```
 
+
+## Create a schema file
+## Setup class generator
+## Add a simple GQL endpoint
+## Add a graphql service, following the convention: document, operationName, parameters
+## Configure 
+## Setup GQL configuration
+- fetchers, loaders, what not
+
+## Integrate the plugin to generate the server types
+
+## Configure the plugin to generate some client sources
+- should be generated under the test sources somehow
+- test sources should spin-up an instance of Grizzly or whatever
