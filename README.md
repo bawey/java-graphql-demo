@@ -14,6 +14,10 @@ mvn archetype:generate -DarchetypeArtifactId=jersey-quickstart-grizzly2 \
 -DarchetypeVersion=2.39.1
 ```
 
+## Integrate Spring with Jersey
+
+https://www.baeldung.com/jersey-rest-api-with-spring
+https://github.com/eclipse-ee4j/jersey/blob/2.39.1/examples/helloworld-spring-webapp/src/main/webapp/WEB-INF/web.xml
 
 ## Create a schema file
 ## Setup class generator
