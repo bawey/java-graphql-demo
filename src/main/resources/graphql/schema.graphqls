@@ -1,0 +1,9 @@
+type Query{
+    languages: [Language!]
+}
+
+type Language{
+    name: String
+    shortIsoCode: String
+}
+
