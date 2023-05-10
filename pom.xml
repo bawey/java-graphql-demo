@@ -122,19 +122,19 @@
                 <artifactId>graphql-classes-maven-plugin</artifactId>
                 <version>${version.graphql-maven-classes-plugin}</version>
                 <configuration>
-                    <source>
-                        <includes>
-                            <include>src/main/resources/graphql/schema.graphqls</include>
-                        </includes>
-                    </source>
                     <outputDirectory>${project.build.directory}/generated-gql-sources/java</outputDirectory>
-                    <generatedAnnotationVersion>1.8</generatedAnnotationVersion>
+                    <generatedAnnotationVersion>11</generatedAnnotationVersion>
                 </configuration>
                 <executions>
                     <execution>
                         <id>forTheBuild</id>
                         <phase>generate-sources</phase>
                         <configuration>
+                            <source>
+                                <includes>
+                                    <include>src/main/resources/graphql/schema.graphqls</include>
+                                </includes>
+                            </source>
                             <packageName>com.github.bawey.graphqldemo.generated.server</packageName>
                             <generatedOutputTypes>SCHEMA_TYPES</generatedOutputTypes>
                         </configuration>
@@ -146,6 +146,13 @@
                         <id>forTheTest</id>
                         <phase>generate-test-sources</phase>
                         <configuration>
+                            <outputDirectory>${project.build.directory}/generated-gql-test-sources/java</outputDirectory>
+                            <source>
+                                <includes>
+                                    <include>src/main/resources/graphql/schema.graphqls</include>
+                                    <include>src/test/resources/*.graphql</include>
+                                </includes>
+                            </source>
                             <packageName>com.github.bawey.graphqldemo.generated.server</packageName>
                             <generatedOutputTypes>DEFINED_OPERATIONS</generatedOutputTypes>
                         </configuration>

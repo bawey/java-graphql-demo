@@ -1,6 +1,7 @@
 package com.github.bawey.graphqldemo;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Controller;
 
 import javax.annotation.Resource;
 import javax.ws.rs.*;
@@ -9,8 +10,8 @@ import javax.ws.rs.core.Response;
 
 
 @RequiredArgsConstructor
+@Controller
 @Path("graphql")
-@Resource
 public class GraphQLResource {
 
     private final GraphQLService graphQLService;

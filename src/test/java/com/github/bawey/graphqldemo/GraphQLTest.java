@@ -1,5 +1,6 @@
 package com.github.bawey.graphqldemo;
 
+import com.github.bawey.graphqldemo.generated.server.languagesQuery.LanguagesQuery;
 import org.glassfish.grizzly.http.server.HttpServer;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -7,12 +8,12 @@ import org.junit.jupiter.api.Test;
 
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
+import javax.ws.rs.client.Entity;
 import javax.ws.rs.client.WebTarget;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
-public class MyResourceTest {
-
+public class GraphQLTest {
     private HttpServer server;
     private WebTarget target;
 
@@ -37,12 +38,11 @@ public class MyResourceTest {
         server.shutdownNow();
     }
 
-    /**
-     * Test to see that the message "Got it!" is sent in the response.
-     */
     @Test
-    public void testHello() {
-        String responseMsg = target.path("hello").request().get(String.class);
-        assertEquals("Hello whoever you are!", responseMsg);
+    void testFetchingLanguages() {
+        LanguagesQuery query = new LanguagesQuery();
+        Entity<LanguagesQuery> entity = Entity.entity(query, MediaType.APPLICATION_JSON_TYPE);
+        Response response = target.path("graphql").request("application/graphql").post(entity);
+        System.out.println(response);
     }
 }

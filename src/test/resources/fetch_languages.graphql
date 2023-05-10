@@ -1,4 +1,4 @@
-{
+query Languages{
     languages {
         name
         shortIsoCode
