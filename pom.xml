@@ -64,22 +64,32 @@
             <version>${version.graphql-maven-classes-plugin}</version>
         </dependency>
 
-        <!-- uncomment this to get JSON support:
-         <dependency>
+
+        <dependency>
             <groupId>org.glassfish.jersey.media</groupId>
-            <artifactId>jersey-media-json-binding</artifactId>
+            <artifactId>jersey-media-json-jackson</artifactId>
+            <version>${version.jersey}</version>
         </dependency>
-        -->
+
+
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter</artifactId>
             <version>${version.junit-jupiter}</version>
             <scope>test</scope>
         </dependency>
+
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <version>1.18.26</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.assertj</groupId>
+            <artifactId>assertj-core</artifactId>
+            <version>3.24.2</version>
+            <scope>test</scope>
         </dependency>
 
     </dependencies>
@@ -146,7 +156,8 @@
                         <id>forTheTest</id>
                         <phase>generate-test-sources</phase>
                         <configuration>
-                            <outputDirectory>${project.build.directory}/generated-gql-test-sources/java</outputDirectory>
+                            <outputDirectory>${project.build.directory}/generated-gql-test-sources/java
+                            </outputDirectory>
                             <source>
                                 <includes>
                                     <include>src/main/resources/graphql/schema.graphqls</include>

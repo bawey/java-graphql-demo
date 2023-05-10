@@ -2,6 +2,7 @@ package com.github.bawey.graphqldemo;
 
 import org.glassfish.grizzly.http.server.HttpServer;
 import org.glassfish.jersey.grizzly2.httpserver.GrizzlyHttpServerFactory;
+import org.glassfish.jersey.jackson.JacksonFeature;
 import org.glassfish.jersey.server.ResourceConfig;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
@@ -30,6 +31,9 @@ public class DemoServer {
         context.getBeansWithAnnotation(Resource.class).values().forEach(rc::register);
         // create and start a new instance of grizzly http server
         // exposing the Jersey application at BASE_URI
+
+        rc.packages("org.glassfish.jersey.examples.jackson").register(JacksonObjectMapperProvider.class).register(JacksonFeature.class);
+
         return GrizzlyHttpServerFactory.createHttpServer(URI.create(BASE_URI), rc);
     }
 

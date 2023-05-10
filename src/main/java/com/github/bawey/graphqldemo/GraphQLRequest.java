@@ -1,14 +1,16 @@
 package com.github.bawey.graphqldemo;
 
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
 
 import java.util.Map;
 
-@RequiredArgsConstructor
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 @Getter
+@Setter
 public class GraphQLRequest {
-    private final String query;
-    private final String operationName;
-    private final Map<String, Object> variables;
+    private String query;
+    private String operationName;
+    private Map<String, Object> variables;
 }

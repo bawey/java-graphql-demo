@@ -2,6 +2,8 @@
 
 A project demonstrating the process of integrating GraphQL functionality into a Spring / Jersey web application
 
+The idea: demonstrate top-level patterns without going too deep into individual aspects like advanced GQL features, serialization, de-serialization etc.
+
 ## Generate bare-bones structure
 
 Follow [Jersey doc](https://eclipse-ee4j.github.io/jersey.github.io/documentation/latest/getting-started.html#new-from-archetype) 
