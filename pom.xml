@@ -41,6 +41,12 @@
         </dependency>
 
         <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>3.0.1</version>
+        </dependency>
+
+        <dependency>
             <groupId>org.glassfish.jersey.ext</groupId>
             <artifactId>jersey-spring5</artifactId>
             <version>${version.jersey}</version>
@@ -75,6 +81,7 @@
             <artifactId>lombok</artifactId>
             <version>1.18.26</version>
         </dependency>
+
     </dependencies>
 
     <build>
