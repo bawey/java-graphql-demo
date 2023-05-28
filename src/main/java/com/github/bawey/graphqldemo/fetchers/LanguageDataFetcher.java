@@ -3,26 +3,26 @@ package com.github.bawey.graphqldemo.fetchers;
 
 import com.github.bawey.graphqldemo.generated.server.types.Language;
 import com.github.bawey.graphqldemo.generated.server.types.Lexeme;
-import com.github.bawey.graphqldemo.repositories.LanguagesRepository;
+import com.github.bawey.graphqldemo.loaders.LanguagesBatchLoader;
 import graphql.schema.DataFetcher;
 import graphql.schema.DataFetchingEnvironment;
 import lombok.RequiredArgsConstructor;
+import org.dataloader.DataLoader;
 import org.springframework.stereotype.Component;
 
-import java.util.Optional;
+import java.util.concurrent.CompletableFuture;
 
 @Component
 @RequiredArgsConstructor
-public class LanguageDataFetcher implements DataFetcher<Language> {
-
-    private final LanguagesRepository repo;
+public class LanguageDataFetcher implements DataFetcher<CompletableFuture<Language>> {
 
     @Override
-    public Language get(DataFetchingEnvironment environment) {
+    public CompletableFuture<Language> get(DataFetchingEnvironment environment) {
         // the "owning" element, so to speak
         Lexeme lexeme = environment.getSource();
-        return Optional.of(repo.getById(lexeme.getLanguageCode()))
-                .map(e -> Language.builder().setName(e.getName()).setShortIsoCode(e.getCode())
-                        .build()).orElseThrow();
+        // the batch loader
+        DataLoader<String, Language> batchLoader = environment.getDataLoader(LanguagesBatchLoader.class.getSimpleName());
+        return batchLoader.load(lexeme.getLanguageCode());
+
     }
 }

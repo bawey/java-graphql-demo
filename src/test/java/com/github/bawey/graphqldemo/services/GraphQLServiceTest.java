@@ -24,7 +24,12 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
@@ -75,15 +80,35 @@ class GraphQLServiceTest {
                 Lexeme.builder().id(new Lexeme.LexemeId("DE", "drei")).build()
         );
 
+        Function<String, Language> languageFactoryFunction = code ->
+                Language.builder().name(code + " Lang").code(code).build();
+
         //when
-        doReturn(dbLexemes).when(lexemesRepo).findAll();
-        doAnswer(invocationOnMock -> Language.builder().code(invocationOnMock.getArgument(0)).build())
+        doReturn(dbLexemes)
+                .when(lexemesRepo).findAll();
+
+        doAnswer(invocationOnMock -> languageFactoryFunction.apply(invocationOnMock.getArgument(0)))
                 .when(languagesRepo).getById(any());
+
+        doAnswer(invocationOnMock -> {
+            Set<String> codes = invocationOnMock.getArgument(0);
+            return codes.stream().map(languageFactoryFunction).collect(Collectors.toList());
+        }).when(languagesRepo).findAllByIdIn(any());
 
         ExecutionResult result = service.execute(request);
         //then
         log.info("Result be like {}", result);
-        verify(languagesRepo, times(2)).getById("EN");
-        verify(languagesRepo, times(3)).getById("DE");
+        verify(languagesRepo, never()).getById("EN");
+        verify(languagesRepo, never()).getById("DE");
+        verify(languagesRepo, times(1)).findAllByIdIn(any());
+
+        assertThat(result.getErrors()).isEmpty();
+        Map<String, List<Map<String, String>>> data = result.getData();
+        assertThat(data).isNotEmpty();
+        assertThat(data).containsKey("lexemes");
+        assertThat(data.get("lexemes")).hasSize(dbLexemes.size());
+        assertThat(data.get("lexemes").stream().map(e -> e.get("headword")).sorted().collect(Collectors.toList()))
+                .containsAll(dbLexemes.stream().map(Lexeme::getId).map(Lexeme.LexemeId::getHeadword).sorted()
+                        .collect(Collectors.toList()));
     }
 }
