@@ -23,6 +23,9 @@ https://github.com/eclipse-ee4j/jersey/blob/2.39.1/examples/helloworld-spring-we
 
 ## Create a schema file
 ## Setup class generator
+```bash
+mvn generate-sources;
+```
 ## Add a simple GQL endpoint
 ## Add a graphql service, following the convention: document, operationName, parameters
 ## Configure 

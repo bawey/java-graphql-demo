@@ -1,4 +1,4 @@
-package com.github.bawey.graphqldemo;
+package com.github.bawey.graphqldemo.resources;
 
 import lombok.*;
 

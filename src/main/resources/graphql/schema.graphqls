@@ -1,9 +1,15 @@
 type Query{
     languages: [Language!]
+    lexemes: [Lexeme!]
 }
 
 type Language{
     name: String
     shortIsoCode: String
+}
+
+type Lexeme{
+    language: Language
+    headword: String
 }
 

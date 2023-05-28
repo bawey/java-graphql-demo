@@ -1,5 +1,6 @@
-package com.github.bawey.graphqldemo;
+package com.github.bawey.graphqldemo.resources;
 
+import com.github.bawey.graphqldemo.services.GraphQLService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 

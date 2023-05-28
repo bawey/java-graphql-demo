@@ -147,6 +147,7 @@
                             </source>
                             <packageName>com.github.bawey.graphqldemo.generated.server</packageName>
                             <generatedOutputTypes>SCHEMA_TYPES</generatedOutputTypes>
+                            <dataObjectEnhancement>BUILDER</dataObjectEnhancement>
                         </configuration>
                         <goals>
                             <goal>generate</goal>

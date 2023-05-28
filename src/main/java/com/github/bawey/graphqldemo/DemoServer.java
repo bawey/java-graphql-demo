@@ -1,5 +1,7 @@
 package com.github.bawey.graphqldemo;
 
+import com.github.bawey.graphqldemo.config.GraphQLContext;
+import com.github.bawey.graphqldemo.config.JacksonObjectMapperProvider;
 import org.glassfish.grizzly.http.server.HttpServer;
 import org.glassfish.jersey.grizzly2.httpserver.GrizzlyHttpServerFactory;
 import org.glassfish.jersey.jackson.JacksonFeature;

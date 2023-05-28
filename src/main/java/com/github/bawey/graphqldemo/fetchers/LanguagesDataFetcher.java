@@ -1,36 +1,24 @@
 package com.github.bawey.graphqldemo.fetchers;
 
 import com.github.bawey.graphqldemo.generated.server.types.Language;
+import com.github.bawey.graphqldemo.repositories.LanguagesRepository;
 import graphql.schema.DataFetcher;
 import graphql.schema.DataFetchingEnvironment;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Component
+@RequiredArgsConstructor
 public class LanguagesDataFetcher implements DataFetcher<List<Language>> {
 
-    private static final List<Language> languages = new ArrayList<>(3);
-
-    static {
-        Language de = new Language();
-        de.setName("German");
-        de.setShortIsoCode("de");
-        languages.add(de);
-        Language en = new Language();
-        en.setName("English");
-        en.setShortIsoCode("en");
-        languages.add(en);
-        Language fr = new Language();
-        fr.setName("French");
-        fr.setShortIsoCode("fr");
-        languages.add(fr);
-    }
+    private final LanguagesRepository repo;
 
     @Override
-    public List<Language> get(DataFetchingEnvironment environment) throws Exception {
-        return new ArrayList<>(languages);
+    public List<Language> get(DataFetchingEnvironment environment) {
+        return repo.findAll().stream().map(e -> Language.builder().setName(e.getName()).setShortIsoCode(e.getCode()).build()).collect(Collectors.toList());
     }
 
 }

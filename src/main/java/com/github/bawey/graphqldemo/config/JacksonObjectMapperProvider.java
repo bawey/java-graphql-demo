@@ -1,4 +1,4 @@
-package com.github.bawey.graphqldemo;
+package com.github.bawey.graphqldemo.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 

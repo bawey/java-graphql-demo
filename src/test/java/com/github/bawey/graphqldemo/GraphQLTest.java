@@ -1,10 +1,12 @@
 package com.github.bawey.graphqldemo;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.github.bawey.graphqldemo.config.JacksonObjectMapperProvider;
 import com.github.bawey.graphqldemo.disposable.GraphQLResponse;
 import com.github.bawey.graphqldemo.generated.server.languagesQuery.LanguagesQuery;
 import com.github.bawey.graphqldemo.generated.server.languagesQuery.LanguagesQueryResult;
 import com.github.bawey.graphqldemo.generated.server.languagesQuery.languages.LanguageResult;
+import com.github.bawey.graphqldemo.resources.GraphQLRequest;
 import org.glassfish.grizzly.http.server.HttpServer;
 import org.glassfish.jersey.jackson.JacksonFeature;
 import org.junit.jupiter.api.AfterEach;
@@ -63,7 +65,7 @@ public class GraphQLTest {
         // make sure all is peachy and that we receive the expected languages
         assertThat(gqlResponse.areErrorsPresent()).isFalse();
         assertThat(gqlResponse.isDataPresent()).isTrue();
-        assertThat(gqlResponse.getData().getLanguages().stream().map(LanguageResult::getShortIsoCode).collect(Collectors.toSet())).containsExactlyInAnyOrder("fr", "en", "de");
+        assertThat(gqlResponse.getData().getLanguages().stream().map(LanguageResult::getShortIsoCode).map(String::toLowerCase).collect(Collectors.toSet())).containsExactlyInAnyOrder("fr", "en", "de");
 
     }
 }

@@ -1,6 +1,7 @@
-package com.github.bawey.graphqldemo;
+package com.github.bawey.graphqldemo.services;
 
 
+import com.github.bawey.graphqldemo.resources.GraphQLRequest;
 import graphql.ExecutionInput;
 import graphql.ExecutionResult;
 import graphql.GraphQL;

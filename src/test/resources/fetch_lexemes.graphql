@@ -1,0 +1,8 @@
+query {
+    lexemes {
+        headword
+        language {
+            shortIsoCode
+        }
+    }
+}
