@@ -24,7 +24,7 @@ import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class GraphQLTest {
+public class DemoServerTest {
 
     private HttpServer server;
     private WebTarget target;
