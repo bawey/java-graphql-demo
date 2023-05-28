@@ -2,6 +2,7 @@ package com.github.bawey.graphqldemo.config;
 
 
 import com.github.bawey.graphqldemo.DemoServer;
+import com.github.bawey.graphqldemo.fetchers.LanguageDataFetcher;
 import com.github.bawey.graphqldemo.fetchers.LanguagesDataFetcher;
 import com.github.bawey.graphqldemo.fetchers.LexemesDataFetcher;
 import graphql.GraphQL;
@@ -44,11 +45,12 @@ public class GraphQLContext {
     }
 
     @Bean
-    public RuntimeWiring runtimeWiring(LanguagesDataFetcher languagesDataFetcher, LexemesDataFetcher lexemesDataFetcher) {
+    public RuntimeWiring runtimeWiring(LanguagesDataFetcher languagesDataFetcher, LexemesDataFetcher lexemesDataFetcher, LanguageDataFetcher languageDataFetcher) {
         RuntimeWiring.Builder wiringBuilder = RuntimeWiring.newRuntimeWiring();
 
         wiringBuilder.type("Query", builder -> builder.dataFetcher("languages", languagesDataFetcher));
         wiringBuilder.type("Query", builder -> builder.dataFetcher("lexemes", lexemesDataFetcher));
+        wiringBuilder.type("Lexeme", builder -> builder.dataFetcher("language", languageDataFetcher));
         return wiringBuilder.build();
     }
 

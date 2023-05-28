@@ -18,7 +18,9 @@ public class LanguagesDataFetcher implements DataFetcher<List<Language>> {
 
     @Override
     public List<Language> get(DataFetchingEnvironment environment) {
-        return repo.findAll().stream().map(e -> Language.builder().setName(e.getName()).setShortIsoCode(e.getCode()).build()).collect(Collectors.toList());
+        return repo.findAll().stream().map(e -> Language.builder()
+                .setName(e.getName()).setShortIsoCode(e.getCode())
+                .build()).collect(Collectors.toList());
     }
 
 }

@@ -9,7 +9,8 @@ type Language{
 }
 
 type Lexeme{
-    language: Language
     headword: String
+    language: Language
+    languageCode: String
 }
 

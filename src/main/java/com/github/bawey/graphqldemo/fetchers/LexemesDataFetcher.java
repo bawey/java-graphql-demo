@@ -1,8 +1,6 @@
 package com.github.bawey.graphqldemo.fetchers;
 
-import com.github.bawey.graphqldemo.generated.server.types.Language;
 import com.github.bawey.graphqldemo.generated.server.types.Lexeme;
-import com.github.bawey.graphqldemo.repositories.LanguagesRepository;
 import com.github.bawey.graphqldemo.repositories.LexemesRepository;
 import graphql.schema.DataFetcher;
 import graphql.schema.DataFetchingEnvironment;
@@ -17,16 +15,12 @@ import java.util.stream.Collectors;
 public class LexemesDataFetcher implements DataFetcher<List<Lexeme>> {
 
     private final LexemesRepository repo;
-    private final LanguagesRepository langRepo;
 
     @Override
     public List<Lexeme> get(DataFetchingEnvironment environment) {
-        return repo.findAll().stream().map(e -> {
-            final var dbLang = langRepo.getById(e.getId().getLanguageCode());
-            return Lexeme.builder()
-                    .setLanguage(Language.builder().setShortIsoCode(dbLang.getCode()).setName(dbLang.getName()).build())
-                    .setHeadword(e.getId().getHeadword())
-                    .build();
-        }).collect(Collectors.toList());
+        return repo.findAll().stream().map(e -> Lexeme.builder()
+                .setHeadword(e.getId().getHeadword())
+                .setLanguageCode(e.getId().getLanguageCode())
+                .build()).collect(Collectors.toList());
     }
 }

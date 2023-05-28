@@ -16,7 +16,9 @@ public class LexemesRepository implements DummyRepository<Lexeme, Lexeme.LexemeI
             Lexeme.builder().id(new Lexeme.LexemeId("EN", "dog")).build(),
             Lexeme.builder().id(new Lexeme.LexemeId("FR", "chien")).build(),
             Lexeme.builder().id(new Lexeme.LexemeId("DE", "Hund")).build(),
-            Lexeme.builder().id(new Lexeme.LexemeId("EN", "chat")).build()
+            Lexeme.builder().id(new Lexeme.LexemeId("EN", "chat")).build(),
+            Lexeme.builder().id(new Lexeme.LexemeId("DE", "Mist")).build(),
+            Lexeme.builder().id(new Lexeme.LexemeId("EN", "mist")).build()
     );
 
     @Override
