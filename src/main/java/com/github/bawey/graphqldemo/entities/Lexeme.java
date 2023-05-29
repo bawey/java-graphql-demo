@@ -13,6 +13,7 @@ public class Lexeme {
     @RequiredArgsConstructor
     @EqualsAndHashCode
     @Getter
+    @Builder
     public static class LexemeId {
         private final String languageCode;
         private final String headword;

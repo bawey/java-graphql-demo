@@ -3,6 +3,11 @@ query {
         headword
         language {
             shortIsoCode
+            name
+        }
+        senses {
+            ordinal
+            value
         }
     }
 }

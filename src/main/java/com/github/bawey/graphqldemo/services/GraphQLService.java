@@ -2,6 +2,7 @@ package com.github.bawey.graphqldemo.services;
 
 
 import com.github.bawey.graphqldemo.loaders.LanguagesBatchLoader;
+import com.github.bawey.graphqldemo.loaders.SensesBatchLoader;
 import com.github.bawey.graphqldemo.resources.GraphQLRequest;
 import graphql.ExecutionInput;
 import graphql.ExecutionResult;
@@ -18,12 +19,15 @@ import java.util.Optional;
 public class GraphQLService {
     private final GraphQL graphQL;
     private final LanguagesBatchLoader languagesBatchLoader;
+    private final SensesBatchLoader sensesBatchLoader;
 
     public ExecutionResult execute(GraphQLRequest graphQLRequest) {
 
         DataLoaderRegistry dataLoaderRegistry = new DataLoaderRegistry();
         dataLoaderRegistry.register(LanguagesBatchLoader.class.getSimpleName(),
                 DataLoaderFactory.newMappedDataLoader(languagesBatchLoader));
+        dataLoaderRegistry.register(SensesBatchLoader.class.getSimpleName(),
+                DataLoaderFactory.newMappedDataLoader(sensesBatchLoader));
 
         ExecutionInput.Builder inputBuilder = ExecutionInput.newExecutionInput();
         Optional.ofNullable(graphQLRequest.getOperationName()).ifPresent(inputBuilder::operationName);

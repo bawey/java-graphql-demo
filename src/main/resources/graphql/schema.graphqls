@@ -12,5 +12,13 @@ type Lexeme{
     headword: String
     language: Language
     languageCode: String
+    senses: [Sense!]
+}
+
+type Sense{
+    languageCode: String
+    headword: String
+    ordinal: Int
+    value: String
 }
 
