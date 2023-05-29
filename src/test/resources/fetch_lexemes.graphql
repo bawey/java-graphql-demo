@@ -1,5 +1,5 @@
-query {
-    lexemes {
+query Lexemes($filters: [LexemesFilter!]){
+    lexemes(filters: $filters){
         headword
         language {
             shortIsoCode

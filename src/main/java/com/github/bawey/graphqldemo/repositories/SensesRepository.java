@@ -33,6 +33,18 @@ public class SensesRepository implements DummyRepository<Sense, Sense.SenseId> {
         registerSenses("EN", "mist",
                 "a mass of minute globules of water suspended in the atmosphere, resembling fog but not as dense",
                 "something that dims, obscures, or blurs");
+        registerSenses("DE", "Hund", "ein als Haustier gehaltenes Tier, das vom Wolf abstammt");
+        registerSenses("DE", "Katze", "ein (Haus)Tier mit scharfen Zähnen und Krallen, das Mäuse fängt");
+        registerSenses("FR", "chat",
+                "Mammifère carnivore au museau court et arrondi, aux griffes rétractiles, " +
+                        "dont il existe des espèces domestiques et des espèces sauvages",
+                "En informatique, espace virtuel de dialogue en ligne réunissant des internautes qui communiquent " +
+                        "par échanges de messages électroniques"
+        );
+        registerSenses("DE", "Mist", "eine Mischung aus Kot, Urin und Stroh, die man als Dünger verwendet");
+        registerSenses("FR", "chien", "Mammifère à odorat développé, rapide à la course, dont l'homme s'est fait un compagnon de vie, de loisirs ou de travail");
+        registerSenses("EN", "dog", "a member of the genus Canis (probably descended from the common wolf) that has been domesticated by man since prehistoric times; occurs in many breeds");
+        registerSenses("EN", "chat", "an informal, light conversation");
     }
 
     @Override

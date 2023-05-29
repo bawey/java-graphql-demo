@@ -1,6 +1,11 @@
 type Query{
     languages: [Language!]
-    lexemes: [Lexeme!]
+    lexemes(filters: [LexemesFilter!]): [Lexeme!]
+}
+
+input LexemesFilter{
+    languageCode: String
+    token: String
 }
 
 type Language{
