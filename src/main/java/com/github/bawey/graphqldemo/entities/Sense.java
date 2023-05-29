@@ -10,6 +10,18 @@ import lombok.RequiredArgsConstructor;
 @Getter
 public class Sense {
 
+    public enum PartOfSpeech {
+        NOUN, VERB;
+    }
+
+    public enum Transitivity {
+        INTRANSITIVE, MONOTRANSITIVE, DITRANSITIVE;
+    }
+
+    public enum Gender {
+        FEMININE, MASCULINE, NEUTER;
+    }
+
     @RequiredArgsConstructor
     @Getter
     @Builder
@@ -31,4 +43,8 @@ public class Sense {
 
     private final SenseId id;
     private final String value;
+    //TODO: crude PoC
+    private final PartOfSpeech partOfSpeech;
+    private final Transitivity transitivity;
+    private final Gender gender;
 }

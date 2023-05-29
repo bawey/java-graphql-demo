@@ -21,7 +21,7 @@ public class SensesDataFetcher implements DataFetcher<CompletableFuture<List<Sen
         // get the owning object
         Lexeme.LexemeId id =
                 Optional.<com.github.bawey.graphqldemo.generated.server.types.Lexeme>of(environment.getSource())
-                .map(l -> Lexeme.LexemeId.builder().languageCode(l.getLanguageCode()).headword(l.getHeadword()).build()).orElseThrow();
+                        .map(l -> Lexeme.LexemeId.builder().languageCode(l.getLanguageCode()).headword(l.getHeadword()).build()).orElseThrow();
         // get the data loader
         DataLoader<Lexeme.LexemeId, List<Sense>> dataLoader = environment.getDataLoader(SensesBatchLoader.class.getSimpleName());
         return dataLoader.load(id);

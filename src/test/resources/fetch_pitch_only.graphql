@@ -1,24 +1,22 @@
-query Lexemes($filters: [LexemesFilter!]){
-    lexemes(filters: $filters){
-        headword
+query {
+    lexemes(filters: [{
+        token: "pitch"
+    }]){
         language {
-            shortIsoCode
             name
         }
+        headword
         senses {
             ordinal
+            value
             properties {
-                __typename
                 ... on NounProperties{
                     partOfSpeech
-                    gender
                 }
                 ... on VerbProperties{
                     partOfSpeech
-                    transitivity
                 }
             }
-            value
         }
     }
 }

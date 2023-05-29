@@ -184,7 +184,7 @@
                             <source>
                                 <includes>
                                     <include>src/main/resources/graphql/schema.graphqls</include>
-                                    <include>src/test/resources/*.graphql</include>
+                                    <include>src/test/resources/fetch_*.graphql</include>
                                 </includes>
                             </source>
                             <packageName>com.github.bawey.graphqldemo.generated.client</packageName>

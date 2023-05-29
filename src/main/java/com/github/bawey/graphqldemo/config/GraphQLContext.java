@@ -6,10 +6,14 @@ import com.github.bawey.graphqldemo.fetchers.LanguageDataFetcher;
 import com.github.bawey.graphqldemo.fetchers.LanguagesDataFetcher;
 import com.github.bawey.graphqldemo.fetchers.LexemesDataFetcher;
 import com.github.bawey.graphqldemo.fetchers.SensesDataFetcher;
+import com.github.bawey.graphqldemo.generated.server.types.GrammaticalProperties;
+import com.github.bawey.graphqldemo.generated.server.types.IGrammaticalProperties;
+import com.github.bawey.graphqldemo.generated.server.types.Lexeme;
 import graphql.GraphQL;
 import graphql.execution.instrumentation.dataloader.DataLoaderDispatcherInstrumentation;
 import graphql.execution.instrumentation.dataloader.DataLoaderDispatcherInstrumentationOptions;
 import graphql.schema.GraphQLSchema;
+import graphql.schema.TypeResolver;
 import graphql.schema.idl.RuntimeWiring;
 import graphql.schema.idl.SchemaGenerator;
 import graphql.schema.idl.SchemaParser;
@@ -47,6 +51,7 @@ public class GraphQLContext {
 
     @Bean
     public RuntimeWiring runtimeWiring(
+            TypeResolver typeResolver,
             LanguagesDataFetcher languagesDataFetcher,
             LexemesDataFetcher lexemesDataFetcher,
             LanguageDataFetcher languageDataFetcher,
@@ -55,7 +60,10 @@ public class GraphQLContext {
         wiringBuilder.type("Query", builder -> builder.dataFetcher("languages", languagesDataFetcher));
         wiringBuilder.type("Query", builder -> builder.dataFetcher("lexemes", lexemesDataFetcher));
         wiringBuilder.type("Lexeme", builder -> builder.dataFetcher("language", languageDataFetcher));
-        wiringBuilder.type("Lexeme", builder -> builder.dataFetcher("senses", sensesDataFetcher));
+        wiringBuilder.type(Lexeme.class.getSimpleName(), builder -> builder.dataFetcher("senses", sensesDataFetcher));
+        // register a type resolver for the union type
+        wiringBuilder.type(GrammaticalProperties.class.getSimpleName(), builder -> builder.typeResolver(typeResolver));
+        wiringBuilder.type(IGrammaticalProperties.class.getSimpleName(), builder -> builder.typeResolver(typeResolver));
         return wiringBuilder.build();
     }
 

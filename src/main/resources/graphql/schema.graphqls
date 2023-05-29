@@ -25,5 +25,33 @@ type Sense{
     headword: String
     ordinal: Int
     value: String
+    properties: GrammaticalProperties
 }
 
+enum PartOfSpeech{
+    NOUN, VERB, ADJECTIVE, ADVERB, PREPOSITION, ARTICLE, PRONOUN, CONJUNCTION
+}
+
+enum GrammaticalGender{
+    FEMININE, MASCULINE, NEUTER
+}
+
+enum Transitivity{
+    INTRANSITIVE, MONOTRANSITIVE, DITRANSITIVE, TRITRASITIVE
+}
+
+interface IGrammaticalProperties{
+    partOfSpeech: PartOfSpeech
+}
+
+type NounProperties implements IGrammaticalProperties{
+    partOfSpeech: PartOfSpeech
+    gender: GrammaticalGender
+}
+
+type VerbProperties implements IGrammaticalProperties{
+    partOfSpeech: PartOfSpeech
+    transitivity: Transitivity
+}
+
+union GrammaticalProperties = NounProperties | VerbProperties
